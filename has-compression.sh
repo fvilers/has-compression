@@ -19,8 +19,9 @@ compressed=$($curl $1 --silent -H "Accept-Encoding: gzip,deflate" --write-out "%
 
 if (( $compressed < $normal ))
 then
-  echo "Server accepts either gzip or deflate."
+  ratio=$(echo "scale=2;1 - ($compressed / $normal)" | bc)
+  echo "The web server compresses the response at $ratio ratio."
 else
-  echo "Server does not accept neither gzip nor deflate."
+  echo "The web server doesn't compress the response."
 fi
 
