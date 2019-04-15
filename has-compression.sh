@@ -15,7 +15,7 @@ then
 fi
 
 normal=$($curl $1 --silent --write-out "%{size_download}\n" --output /dev/null)
-compressed=$($curl $1 --silent -H "Accept-Encoding: gzip,deflate" --write-out "%{size_download}\n" --output /dev/null)
+compressed=$($curl $1 --silent -H "Accept-Encoding: gzip, deflate, br" --write-out "%{size_download}\n" --output /dev/null)
 
 if (( $compressed < $normal ))
 then
